@@ -14,7 +14,6 @@ server.use(cors());
 
 // api routes
 server.use('/control', require('./control/control.controller'));
-server.use('/user', require('./user/user.controller'));
 
 // ---------------------------------------------------- SPOTIFY LOGIN ----------------------------------------------------
 var client_id = 'f9a4fbbe54354fe78dab1ef7d09d97a2'; // Your client id
@@ -115,16 +114,11 @@ server.get('/callback', function(req, res) {
 
         // pass tokens to our api
         request.post({
-          url: 'http://localhost:'+PORT+'/user/setTokens',
+          url: 'http://localhost:'+PORT+'/control/setTokens',
           body: {accessToken: access_token, refreshToken: refresh_token},
           json: true
         }, (err, res, body) => {
-          console.log(body);
-          request.post({
-            url: 'http://localhost:'+PORT+'/user/getTokens',
-          }, (err, res, body) => {
-            console.log(body);
-          });
+          console.log("Set Tokens");
         });
       } else {
         res.redirect('/#' +

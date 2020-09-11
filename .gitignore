@@ -5,6 +5,8 @@
 /client/.pnp
 /client/.pnp.js
 
+/server/node_modules
+
 # testing
 /client/coverage
 
@@ -21,3 +23,5 @@
 /client/npm-debug.log*
 /client/yarn-debug.log*
 /client/yarn-error.log*
+
+/server/spotify_test
