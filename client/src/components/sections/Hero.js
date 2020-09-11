@@ -35,7 +35,7 @@ const Hero = ({
   const closeModal = (e) => {
     e.preventDefault();
     setVideomodalactive(false);
-  }   
+  }
 
   const outerClasses = classNames(
     'hero section center-content',
@@ -65,7 +65,7 @@ const Hero = ({
             </h1>
             <div className="container-xs">
               <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
-                Our product lets users join a music room, share a queue and upvote/downvote songs. 
+                Our product lets users join a music room, share a queue and upvote/downvote songs.
                 </p>
                 <p>This lets everyone have input on what music is being played!</p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
@@ -89,7 +89,7 @@ const Hero = ({
             >
               <Image
                 className="has-shadow"
-                src={require('./../../assets/images/video-placeholder.jpg')}
+                src={require('./../../assets/images/lightshow.jpg')}
                 alt="Hero"
                 width={896}
                 height={504} />
