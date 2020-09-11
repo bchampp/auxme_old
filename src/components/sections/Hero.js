@@ -65,14 +65,15 @@ const Hero = ({
             </h1>
             <div className="container-xs">
               <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
-                Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.
+                Our product lets users join a music room, share a queue and upvote/downvote songs. 
                 </p>
+                <p>This lets everyone have input on what music is being played!</p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
                 <ButtonGroup>
-                  <Button tag="a" color="primary" wideMobile href="https://cruip.com/">
+                  <Button tag="a" color="primary" wideMobile href="https://auxme.ca">
                     Get started
                     </Button>
-                  <Button tag="a" color="dark" wideMobile href="https://github.com/cruip/open-react-template/">
+                  <Button tag="a" color="dark" wideMobile href="https://github.com/bchampp/auxme">
                     View on Github
                     </Button>
                 </ButtonGroup>
