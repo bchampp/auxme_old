@@ -162,7 +162,7 @@ const FeaturesTiles = ({
                     Music Democracy
                     </h4>
                   <p className="m-0 text-sm">
-                    Everyone can have their say in the nest song with the upvode/downvote feature in the queue.
+                    Everyone can have their say in the next song with the upvode/downvote feature in the queue.
                     </p>
                 </div>
               </div>
