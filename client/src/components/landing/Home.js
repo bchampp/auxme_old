@@ -1,10 +1,8 @@
 import React from 'react';
 // import sections
-import Hero from '../sections/Hero';
-import FeaturesTiles from '../sections/FeaturesTiles';
-import FeaturesSplit from '../sections/FeaturesSplit';
-import Testimonial from '../sections/Testimonial';
-import Cta from '../sections/Cta';
+import Hero from '../landing/Hero';
+import FeaturesTiles from '../landing/FeaturesTiles';
+import Cta from '../landing/Cta';
 
 const Home = () => {
 
