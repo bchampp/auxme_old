@@ -25,3 +25,4 @@
 /client/yarn-error.log*
 
 /server/spotify_test
+node_modules
