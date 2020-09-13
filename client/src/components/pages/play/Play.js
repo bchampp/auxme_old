@@ -2,9 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import api from '../../../api';
 
-
-// import sections
-
 const Play = () => {
 
   const handleButton = () => {
