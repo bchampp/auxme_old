@@ -1,12 +1,24 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import api from '../../../api';
+
+
 // import sections
 
 const Play = () => {
 
+  const handleButton = () => {
+    console.log("Button Click");
+    api.spotify.getUser();
+  }
+
   return (
-    <div>
+    <>
       Music Player
-    </div>
+      <Button style={{'zIndex': 101}} onClick={() => {handleButton()}}>
+        Click Me
+      </Button>
+    </>
   );
 }
 

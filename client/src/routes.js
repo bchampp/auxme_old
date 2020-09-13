@@ -6,8 +6,8 @@ import AppRoute from './utils/AppRoute';
 import LayoutDefault from './layouts/LayoutDefault';
 
 // Views / Pages 
-import Home from './components/landing/Home';
-import Play from './components/play/Play';
+import Home from './components/pages/landing/Home';
+import Play from './components/pages/play/Play';
 import Shop from "./components/pages/shop/Shop";
 
 const Routes = ({ location }) => {
