@@ -1,11 +1,17 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# vscode stuff
+.vscode/*
+
+# Api keys
+config/*
+
 # dependencies
 /client/node_modules
 /client/.pnp
 /client/.pnp.js
 
-/server/node_modules
+/api/node_modules
 
 # testing
 /client/coverage

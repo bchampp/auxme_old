@@ -4,9 +4,9 @@ import React from 'react';
 const Play = () => {
 
   return (
-    <>
-      
-    </>
+    <div>
+      Music Player
+    </div>
   );
 }
 

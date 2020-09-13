@@ -1,0 +1,49 @@
+{
+  "name": "AuxMe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dateformat": "^3.0.3",
+    "dotenv": "^8.2.0",
+    "express": "~4.17.1",
+    "helmet": "^3.21.2",
+    "hubspot": "^2.3.12",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.5",
+    "multer": "^1.4.2",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.4.2",
+    "npm": "^6.14.6",
+    "prerender-node": "^3.2.5",
+    "react-compound-slider": "^2.5.0",
+    "react-datepicker": "^3.0.0",
+    "underscore": "^1.10.2",
+    "validator": "^12.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "ie 11",
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
