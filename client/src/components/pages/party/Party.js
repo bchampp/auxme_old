@@ -23,7 +23,8 @@ const Party = (props) => {
 
     const joinPartyRoom = (id) => {
         console.log("Joining party room with ID: " + id);
-        window.location = "/party"
+        setRoom(id);
+        // window.location = "/party"
     }
 
     const generateSharingLink = (id) => {
@@ -33,13 +34,17 @@ const Party = (props) => {
     return (
         <div className="hero section center-content illustration-section-01">
             Start a new Party!
-            { room === null &&
+            { room === null ?
                 <div style={{ height: '400px' }}>
                     <Button onClick={() => { generatePartyRoom() }}>
                         New Party Room
                 </Button>
                 </div>
-            }
+                :
+                <div>
+                    Welcome to room: {room}
+                    </div>
+}
         </div>
     )
 }
