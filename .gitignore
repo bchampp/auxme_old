@@ -6,12 +6,14 @@
 # Api keys
 config/*
 
+.env
+
 # dependencies
 /client/node_modules
 /client/.pnp
 /client/.pnp.js
 
-/api/node_modules
+/api/node_modules/*
 
 # testing
 /client/coverage
