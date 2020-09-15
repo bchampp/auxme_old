@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
-import api from '../../../api';
 import qs from "query-string";
-import { TextField } from '@material-ui/core';
 
+/* Material UI Stuff */
+import { makeStyles } from '@material-ui/core/styles';
+import { TextField, Backdrop, CircularProgress, Button } from '@material-ui/core';
+
+/* Custmo Components */
+import SharingURLWindow from './SharingURL';
+import api from '../../../api';
+
+/* Custom Button Styling -- there are better ways to organize styling for material components */
 const useStyles = makeStyles({
     root: {
         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -26,12 +29,18 @@ const useStyles = makeStyles({
       },
 });
 
+/* Party Component Implementation */
 export default function Party(props) {
     const classes = useStyles();
-    const [room, setRoom] = useState(null);
-    const [textOpen, setTextOpen] = useState(false);
+
+    // Hooks
+    const [room, setRoom] = useState(null); // Room doesn't exist
     const [name, setName] = useState('');
-    const [open, setOpen] = useState(false);
+    
+    const [nameInputOpen, setNameInputOpen] = useState(false);
+    const [loader, setLoader] = useState(false);
+    const [sharingURLOpen, setSharingURLOpen] = useState(false);
+    const [sharingLink, setSharingLink] = useState('')
 
     /* Component Life Cycle Methods */
     useEffect(() => {
@@ -46,13 +55,16 @@ export default function Party(props) {
 
     const generatePartyRoom = async () => {
         console.log("Generating new party room with name: " + name);
-        setOpen(true);
+        setLoader(true);
         const res = await api.party.newRoom(name); // Will need to pass in user token here ?
         // Add some shit here for catching bad API calls 
+        let sharingLink = 'http://localhost:3000/party?room=' + res.id;
+
         setRoom(name);
-        setOpen(false);
-        setTextOpen(false);
-        console.log(res);
+        setLoader(false);
+        setNameInputOpen(false);
+        setSharingURLOpen(true);
+        setSharingLink(sharingLink)
     }
 
     const joinPartyRoom = async id => {
@@ -65,6 +77,7 @@ export default function Party(props) {
         setName(e.target.value);
     }
 
+    const handleModalClose = () => setSharingURLOpen(false);
     return (
         <div className="hero section center-content illustration-section-01">
             {/* Room Doesn't Exist yet */}
@@ -74,7 +87,7 @@ export default function Party(props) {
                         root: classes.root, // class name, e.g. `classes-nesting-root-x`
                         label: classes.label, // class name, e.g. `classes-nesting-label-x`
                     }}
-                        onClick={() => { setTextOpen(true) }}>
+                        onClick={() => { setNameInputOpen(true) }}>
                         New Party Room
                 </Button>
                 </div>
@@ -84,7 +97,7 @@ export default function Party(props) {
                 </div>
             }
             {
-                textOpen === true &&
+                nameInputOpen === true &&
                 <div>
                     <p style={{ color: 'white' }}>Name your party!</p>
                     <TextField
@@ -104,11 +117,16 @@ export default function Party(props) {
                     />
                 </div>
             }
-            <Backdrop className={classes.backdrop} open={open}>
+
+            {/* Loader */}
+            <Backdrop className={classes.backdrop} open={loader}>
                 <CircularProgress color="inherit" />
             </Backdrop>
+
+            {/* Sharing URL Window */}
+            <SharingURLWindow 
+                open={sharingURLOpen} onClose={handleModalClose} sharingURL={sharingLink}
+            />
         </div>
     )
 }
-
-
