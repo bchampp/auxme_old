@@ -10,6 +10,18 @@ export default {
         getUser: () => {
             axios.post(`/api/spotify/get-user`).then(res => res.data.response)
         },
+        togglePlay: () => {
+            axios.post('/api/spotify/play').then(res => res.data.response)
+        },
+        nextTrack: () => {
+            axios.post(`/api/spotify/nexk`).then(res => res.data.response)
+        },
+        previousTrack: () => {
+            axios.post(`/api/spotify/previous`).then(res => res.data.response)
+        },
+        addToQueue: () => {
+            axios.post(`/api/spotify/queue`).then(res => res.data.response)
+        }
     },
     queue: {
         upVote: (song) => {

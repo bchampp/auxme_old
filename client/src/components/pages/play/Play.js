@@ -9,6 +9,30 @@ const Play = () => {
     api.spotify.getUser();
   }
 
+  const playButton = () => {
+    console.log("Play button clicked");
+    api.spotify.togglePlay();
+  }
+
+  const nextTrack = () => {
+    console.log("Next track");
+    api.spotify.nextTrack();
+  }
+
+  const previousTrack = () => {
+    console.log("Previous track");
+    api.spotify.previousTrack();
+  }
+
+  const addToQueue = () => {
+    console.log("Adding song to queue");
+    api.spotify.addToQueue();
+  }
+
+  const search = () => {
+    console.log("Searching for song");
+    api.spotify.search();
+  }
   return (
     <>
       Music Player
