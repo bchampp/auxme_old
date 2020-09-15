@@ -10,6 +10,7 @@ import helmet from "helmet";
 // Routes
 import spotify from './api/routes/spotify';
 import rooms from './api/routes/rooms';
+import login from './api/routes/login';
 
 dotenv.config();
 const app = express();
@@ -32,9 +33,10 @@ const allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 
-// Include custom routing 
+// Include custom routing
 app.use("/api/spotify", spotify);
 app.use("/api/rooms", rooms);
+app.use("/api/login", login);
 
 //Connect to MLab database
 const db = process.env.DB_URL;
@@ -65,7 +67,7 @@ const hstsMiddleware = helmet.hsts({
 app.use((req, res, next) => {
   includeSubDomains: true;
   preload: true;
-  if (req.secure) { hstsMiddleware(req, res, next) } 
+  if (req.secure) { hstsMiddleware(req, res, next) }
   else { next() }
 })
 
@@ -78,7 +80,7 @@ app.all(/.*/, (req, res, next) => {
 
 app.use(express.static("client/build"));
 
-app.get("/*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "200.html"));
 });
 
