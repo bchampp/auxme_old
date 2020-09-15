@@ -9,6 +9,7 @@ import helmet from "helmet";
 
 // Routes
 import spotify from './api/routes/spotify';
+import rooms from './api/routes/rooms';
 import login from './api/routes/login';
 
 dotenv.config();
@@ -34,6 +35,7 @@ app.use(allowCrossDomain);
 
 // Include custom routing
 app.use("/api/spotify", spotify);
+app.use("/api/rooms", rooms);
 app.use("/api/login", login);
 
 //Connect to MLab database
