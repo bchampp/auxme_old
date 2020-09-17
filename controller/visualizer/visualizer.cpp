@@ -1,9 +1,7 @@
-/*
-  Visualizer.cpp - Library for Visualizing Aux Signals on LEDs
-*/
 
 #include "Arduino.h"
 #include "Visualizer.h"
+
 
 Visualizer::Visualizer(int voltagePin, int frequencyPin, int stripPin)
 {

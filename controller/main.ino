@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 
-// Custom Libraries
+// custom libraries
 #include "visualizer/visualizer.h";
 #include "interface/interface.h";
 
@@ -8,115 +8,123 @@
  #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
 #endif
 
-#define LED_PIN    6
+typedef struct color {
+  // color object representing RGB values
+  int red;
+  int green;
+  int blue;
+}; 
 
-#define LED_COUNT 144
+#define DEBUG true
 
-Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+// pin definitions
+#define aux A0
+#define pot A1
+#define strobe 2
+#define reset 3
+#define led 6
+
+// Constants
+#define led_count 144
+#define pot_low 0
+#define pot_high 1023
+#define aux_low 120
+#define aux_high 840
+
+// init NeoPixel Strip
+Adafruit_NeoPixel strip(led_count, led, NEO_GRB + NEO_KHZ800);
+
+/* Function Prototypes */
+int getBrightness(int volume);
+color getColor(int volume, int brightness);
+void printData(int volume, int brightness, color pattern);
 
 void setup() {
-#if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
-  clock_prescale_set(clock_div_1);
-#endif
-  Serial.begin(9600);
-  pinMode(A0, INPUT);
-  Serial.print("Initialized");
+  if(DEBUG){ Serial.begin(9600); }
+
+  // pin assignments
+  pinMode(aux, INPUT);
+  pinMode(pot, INPUT);
+
+  pinMode(strobe, OUTPUT);
+  pinMode(reset, OUTPUT);
+
+  // assert href to default 
+  analogReference(DEFAULT);
+
+  // init LED strip
   strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
   strip.show();            // Turn OFF all pixels ASAP
-  strip.setBrightness(150); // Set BRIGHTNESS to about 1/5 (max = 255)
+
+  // reset the MSGEQ7
+  digitalWrite(reset, HIGH);
+  digitalWrite(reset, LOW);
 }
  
 void loop() {
-  int volume = analogRead(A0);
-  Serial.println(volume);
-  // colorWipe(strip.Color(255,   0,   0), 50); // Red
-  // colorWipe(strip.Color(  0, 255,   0), 50); // Green
-  // colorWipe(strip.Color(  0,   0, 255), 50); // Blue
+  // pulse MSGEQ7 strobe 
+  digitalWrite(strobe, HIGH); digitalWrite(strobe, LOW);
 
-  // // Do a theater marquee effect in various colors...
-  // theaterChase(strip.Color(127, 127, 127), 50); // White, half brightness
-  // theaterChase(strip.Color(127,   0,   0), 50); // Red, half brightness
-  // theaterChase(strip.Color(  0,   0, 127), 50); // Blue, half brightness
+  // let output settle from pulse
+  delayMicroseconds(25);
 
-  // rainbow(10);             // Flowing rainbow cycle along the whole strip
-  // theaterChaseRainbow(50); // Rainbow-enhanced theaterChase variant
-}
+  // map filtered aux signal from 0 to 1000
+  int volume = map(constrain(analogRead(aux), aux_low, aux_high), aux_low, aux_high, 0, 1000); 
+  
+  // get brightness level
+  int brightness = getBrightness(volume);
 
+  // get color pattern
+  color pattern = getColor(volume, brightness);
 
-// Some functions of our own for creating animated effects -----------------
+  // let output settle
+  delayMicroseconds(100); 
 
-// Fill strip pixels one after another with a color. Strip is NOT cleared
-// first; anything there will be covered pixel by pixel. Pass in color
-// (as a single 'packed' 32-bit value, which you can get by calling
-// strip.Color(red, green, blue) as shown in the loop() function above),
-// and a delay time (in milliseconds) between pixels.
-void colorWipe(uint32_t color, int wait) {
-  for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
-    strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
-    strip.show();                          //  Update strip to match
-    delay(wait);                           //  Pause for a moment
+  if(DEBUG){
+    printData(volume, brightness, pattern);
   }
 }
 
-// Theater-marquee-style chasing lights. Pass in a color (32-bit value,
-// a la strip.Color(r,g,b) as mentioned above), and a delay time (in ms)
-// between frames.
-void theaterChase(uint32_t color, int wait) {
-  for(int a=0; a<10; a++) {  // Repeat 10 times...
-    for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
-      strip.clear();         //   Set all pixels in RAM to 0 (off)
-      // 'c' counts up from 'b' to end of strip in steps of 3...
-      for(int c=b; c<strip.numPixels(); c += 3) {
-        strip.setPixelColor(c, color); // Set pixel 'c' to value 'color'
-      }
-      strip.show(); // Update strip with new contents
-      delay(wait);  // Pause for a moment
-    }
-  }
+int getBrightness(int volume){
+  // Currently not using volume to adjust brightness
+  return map(analogRead(pot), pot_low, pot_high, 0, 255);
 }
 
-// Rainbow cycle along whole strip. Pass delay time (in ms) between frames.
-void rainbow(int wait) {
-  // Hue of first pixel runs 5 complete loops through the color wheel.
-  // Color wheel has a range of 65536 but it's OK if we roll over, so
-  // just count from 0 to 5*65536. Adding 256 to firstPixelHue each time
-  // means we'll make 5*65536/256 = 1280 passes through this outer loop:
-  for(long firstPixelHue = 0; firstPixelHue < 5*65536; firstPixelHue += 256) {
-    for(int i=0; i<strip.numPixels(); i++) { // For each pixel in strip...
-      // Offset pixel hue by an amount to make one full revolution of the
-      // color wheel (range of 65536) along the length of the strip
-      // (strip.numPixels() steps):
-      int pixelHue = firstPixelHue + (i * 65536L / strip.numPixels());
-      // strip.ColorHSV() can take 1 or 3 arguments: a hue (0 to 65535) or
-      // optionally add saturation and value (brightness) (each 0 to 255).
-      // Here we're using just the single-argument hue variant. The result
-      // is passed through strip.gamma32() to provide 'truer' colors
-      // before assigning to each pixel:
-      strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue)));
-    }
-    strip.show(); // Update strip with new contents
-    delay(wait);  // Pause for a moment
-  }
+color getColor(int volume, int brightness){
+  color output;
+  output.red = 0;
+  output.blue = 0;
+  output.green = 0;
+
+  // Add logic here to adjust colors based on a pattern
+
+
+
+  return output;
 }
 
-// Rainbow-enhanced theater marquee. Pass delay time (in ms) between frames.
-void theaterChaseRainbow(int wait) {
-  int firstPixelHue = 0;     // First pixel starts at red (hue 0)
-  for(int a=0; a<30; a++) {  // Repeat 30 times...
-    for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
-      strip.clear();         //   Set all pixels in RAM to 0 (off)
-      // 'c' counts up from 'b' to end of strip in increments of 3...
-      for(int c=b; c<strip.numPixels(); c += 3) {
-        // hue of pixel 'c' is offset by an amount to make one full
-        // revolution of the color wheel (range 65536) along the length
-        // of the strip (strip.numPixels() steps):
-        int      hue   = firstPixelHue + c * 65536L / strip.numPixels();
-        uint32_t color = strip.gamma32(strip.ColorHSV(hue)); // hue -> RGB
-        strip.setPixelColor(c, color); // Set pixel 'c' to value 'color'
-      }
-      strip.show();                // Update strip with new contents
-      delay(wait);                 // Pause for a moment
-      firstPixelHue += 65536 / 90; // One cycle of color wheel over 90 frames
-    }
-  }
+void printData(int volume, int brightness, color pattern){
+  Serial.println();
+
+  Serial.print("Aux Volume: ");
+  float vol = volume / 100;
+  Serial.print(vol);
+  Serial.print("% \t");
+
+  Serial.print("Brightness: ");
+  Serial.print(map(brightness, 0, 255, 0, 100));
+  Serial.print("% \t");
+
+  Serial.print("RED: ");
+  Serial.print(map(pattern.red, 0, 255, 0, 100));
+  Serial.print("% \t");
+
+  Serial.print("GREEN: ");
+  Serial.print(map(pattern.green, 0, 255, 0, 100));
+  Serial.print("% \t");
+
+  Serial.print("BLUE: ");
+  Serial.print(map(pattern.blue, 0, 255, 0, 100));
+  Serial.print("% \t");
 }
+
