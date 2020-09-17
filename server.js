@@ -4,6 +4,7 @@ import express from "express";
 import dotenv from "dotenv";
 import path  from "path";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import helmet from "helmet";
 
@@ -49,6 +50,7 @@ mongoose.connect( db,
 //Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 //Use Routes
 // app.use("/api/projects", projects);

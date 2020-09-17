@@ -41,7 +41,7 @@ const Play = () => {
   return (
     <>
       Music Player
-      <Button style={{'zIndex': 101}} onClick={() => {loginButton()}}>
+      <Button style={{'zIndex': 101, color: 'white'}} onClick={() => {loginButton()}}>
         Login
       </Button>
     </>

@@ -1,4 +1,5 @@
 import express from 'express';
+import request from 'request';
 // import Queue from '../models/queue';
 
 const router = express.Router();
@@ -25,6 +26,8 @@ router.post("/get-user", (req, res) => {
 });
 
 router.post("/play", (req, res) => {
+    // accessToken = req.cookies['access_token'];
+    console.log(accessToken);
     if (!playing) {
       request({
         url: "https://api.spotify.com/v1/me/player/play",
