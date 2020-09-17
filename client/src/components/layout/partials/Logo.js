@@ -23,8 +23,8 @@ const Logo = ({
           <Image
             src={require('./../../../assets/images/auxme-logo.png')}
             alt="Open"
-            width={32}
-            height={32} />
+            width={72}
+            height={72} />
         </Link>
       </h1>
     </div>

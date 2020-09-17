@@ -65,7 +65,7 @@ const Hero = ({
             </h1>
             <div className="container-xs">
               <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
-                Our product lets users join a music room, share a queue and upvote/downvote songs.
+                Join a shared music room, collaborate on the queue and vote on songs!
                 </p>
                 <p>This lets everyone have input on what music is being played!</p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
