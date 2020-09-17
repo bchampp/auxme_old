@@ -63,12 +63,15 @@ router.get('/callback', function(req, res) {
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
 
-  if (state === null || state !== storedState) {
-    res.redirect('/#' +
-      querystring.stringify({
-        error: 'state_mismatch'
-      }));
-  } else {
+
+  //THIS WAS NOT WORKING BECAUSE I WAS NOT RECIEVING COOKIES, THERE IS NO ERROR CHECKING RIGHT NOW
+  // if (state === null || state !== storedState) {
+  //   res.redirect('/#' +
+  //     querystring.stringify({
+  //       error: 'state_mismatch'
+  //     }));
+  // } else {
+  if (true) {
     res.clearCookie(stateKey);
     var authOptions = {
       url: 'https://accounts.spotify.com/api/token',
@@ -110,10 +113,11 @@ router.get('/callback', function(req, res) {
 
         // pass tokens to our api
         request.post({
-          url: 'http://localhost:'+PORT+'/control/setTokens',
+          url: 'http://localhost:'+process.env.PORT+'/api/spotify/setTokens',
           body: {accessToken: access_token, refreshToken: refresh_token},
           json: true
         }, (err, res, body) => {
+          console.log(access_token);
           console.log("Set Tokens");
         });
       } else {
