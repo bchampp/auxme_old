@@ -9,6 +9,7 @@ Online music queueing service with upvote / downvote functionality.
 - [Drew Cooper](https://github.com/acooperdh)
 - [Jack Mandin](https://github.com/jack-102)
 - [Kyle Cumming](https://github.com/kylecumming)
+- [Jackson Wiederick](https://github.com/Wiederickj)
 
 
 ## License
