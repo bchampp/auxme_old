@@ -19,23 +19,32 @@ typedef struct color {
 
 // pin definitions
 #define aux A0
+#define pot A1
 #define strobe 2
 #define reset 3
 #define led 6
 
 // Constants
 #define led_count 144
-#define low 120
-#define high 840
+#define pot_low 0
+#define pot_high 1023
+#define aux_low 120
+#define aux_high 840
 
 // init NeoPixel Strip
 Adafruit_NeoPixel strip(led_count, led, NEO_GRB + NEO_KHZ800);
+
+/* Function Prototypes */
+int getBrightness(int volume);
+color getColor(int volume, int brightness);
+void printData(int volume, int brightness, color pattern);
 
 void setup() {
   if(DEBUG){ Serial.begin(9600); }
 
   // pin assignments
   pinMode(aux, INPUT);
+  pinMode(pot, INPUT);
 
   pinMode(strobe, OUTPUT);
   pinMode(reset, OUTPUT);
@@ -60,7 +69,7 @@ void loop() {
   delayMicroseconds(25);
 
   // map filtered aux signal from 0 to 1000
-  int volume = map(constrain(analogRead(aux), low, high), low, high, 0, 1000); 
+  int volume = map(constrain(analogRead(aux), aux_low, aux_high), aux_low, aux_high, 0, 1000); 
   
   // get brightness level
   int brightness = getBrightness(volume);
@@ -76,13 +85,31 @@ void loop() {
   }
 }
 
+int getBrightness(int volume){
+  // Currently not using volume to adjust brightness
+  return map(analogRead(pot), pot_low, pot_high, 0, 255);
+}
+
+color getColor(int volume, int brightness){
+  color output;
+  output.red = 0;
+  output.blue = 0;
+  output.green = 0;
+
+  // Add logic here to adjust colors based on a pattern
+
+
+
+  return output;
+}
+
 void printData(int volume, int brightness, color pattern){
   Serial.println();
-  
+
   Serial.print("Aux Volume: ");
   float vol = volume / 100;
-  Serial.print(vol)
-  Serial.print("% \t")
+  Serial.print(vol);
+  Serial.print("% \t");
 
   Serial.print("Brightness: ");
   Serial.print(map(brightness, 0, 255, 0, 100));
@@ -101,24 +128,3 @@ void printData(int volume, int brightness, color pattern){
   Serial.print("% \t");
 }
 
-// Rainbow-enhanced theater marquee. Pass delay time (in ms) between frames.
-void theaterChaseRainbow(int wait) {
-  int firstPixelHue = 0;     // First pixel starts at red (hue 0)
-  for(int a=0; a<30; a++) {  // Repeat 30 times...
-    for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
-      strip.clear();         //   Set all pixels in RAM to 0 (off)
-      // 'c' counts up from 'b' to end of strip in increments of 3...
-      for(int c=b; c<strip.numPixels(); c += 3) {
-        // hue of pixel 'c' is offset by an amount to make one full
-        // revolution of the color wheel (range 65536) along the length
-        // of the strip (strip.numPixels() steps):
-        int      hue   = firstPixelHue + c * 65536L / strip.numPixels();
-        uint32_t color = strip.gamma32(strip.ColorHSV(hue)); // hue -> RGB
-        strip.setPixelColor(c, color); // Set pixel 'c' to value 'color'
-      }
-      strip.show();                // Update strip with new contents
-      delay(wait);                 // Pause for a moment
-      firstPixelHue += 65536 / 90; // One cycle of color wheel over 90 frames
-    }
-  }
-}
