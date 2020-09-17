@@ -1,5 +1,5 @@
 {
     "programmer": "AVR ISP",
     "board": "arduino:avr:uno",
-    "sketch": "controller/tests/IC_testing.ino"
+    "sketch": "controller/main.ino"
 }
