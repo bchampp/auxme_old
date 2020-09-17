@@ -36,7 +36,7 @@ export default function Party(props) {
     // Hooks
     const [room, setRoom] = useState(null); // Room doesn't exist
     const [name, setName] = useState('');
-    
+
     const [nameInputOpen, setNameInputOpen] = useState(false);
     const [loader, setLoader] = useState(false);
     const [sharingURLOpen, setSharingURLOpen] = useState(false);
@@ -50,14 +50,14 @@ export default function Party(props) {
             let roomID = query.room;
             joinPartyRoom(roomID)
         }
-    }); // Add any listeners we want here 
+    }); // Add any listeners we want here
 
 
     const generatePartyRoom = async () => {
         console.log("Generating new party room with name: " + name);
         setLoader(true);
         const res = await api.party.newRoom(name); // Will need to pass in user token here ?
-        // Add some shit here for catching bad API calls 
+        // Add some shit here for catching bad API calls
         let sharingLink = 'http://localhost:3000/party?room=' + res.id;
 
         setRoom(name);
@@ -124,7 +124,7 @@ export default function Party(props) {
             </Backdrop>
 
             {/* Sharing URL Window */}
-            <SharingURLWindow 
+            <SharingURLWindow
                 open={sharingURLOpen} onClose={handleModalClose} sharingURL={sharingLink}
             />
         </div>

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request'); // "Request" library
+const axios = require('axios');
 const cors = require('cors');
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
@@ -105,21 +106,20 @@ router.get('/callback', function(req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
+        res.redirect('http://localhost:3000?' +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
           }));
 
         // pass tokens to our api
-        request.post({
-          url: 'http://localhost:'+process.env.PORT+'/api/spotify/setTokens',
-          body: {accessToken: access_token, refreshToken: refresh_token},
-          json: true
-        }, (err, res, body) => {
-          console.log(access_token);
-          console.log("Set Tokens");
-        });
+        // axios.post('http://localhost:'+process.env.PORT+'/api/spotify/setTokens', {
+        //   accessToken: access_token, refreshToken: refresh_token
+        // }).then((res) => {
+        //   console.log("Set Tokens");
+        // }).catch((err) => {
+        //   console.log(err);
+        // });
       } else {
         res.redirect('/#' +
           querystring.stringify({

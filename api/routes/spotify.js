@@ -22,7 +22,7 @@ router.post("/get-user", (req, res) => {
     res.json({ response: {
         success: true
     }});
-})
+});
 
 router.post("/play", (req, res) => {
     if (!playing) {
@@ -47,7 +47,7 @@ router.post("/play", (req, res) => {
     res.json({ response: {
         success: true
     }});
-})
+});
 
 
 router.post("/next", (req, res) => {
@@ -63,7 +63,7 @@ router.post("/next", (req, res) => {
     res.json({ response: {
         success: true
     }});
-})
+});
 
 router.post("/previous", (req, res) => {
     request({
@@ -78,7 +78,7 @@ router.post("/previous", (req, res) => {
     res.json({ response: {
         success: true
     }});
-})
+});
 
 router.post("/search", (req, res) => {
     request({
@@ -94,7 +94,7 @@ router.post("/search", (req, res) => {
     res.json({ response: {
         success: true
     }});
-})
+});
 
 
 //--------------------------------------- USER Routes ------------------------------------------
@@ -103,7 +103,6 @@ router.post("/isLoggedIn", (req, res) => {
 });
 
 router.post("/setTokens", (req, res) => {
-  console.log(req.body);
   accessToken = req.body.accessToken;
   refreshToken = req.body.refreshToken;
   loggedIn = (accessToken != '');

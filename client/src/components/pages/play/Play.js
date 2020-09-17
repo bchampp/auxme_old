@@ -4,6 +4,11 @@ import api from '../../../api';
 
 const Play = () => {
 
+  const loginButton = () => {
+    console.log("Logging In");
+    window.location.replace("http://localhost:8080/api/login/login");
+  }
+
   const handleButton = () => {
     console.log("Button Click");
     api.spotify.getUser();
@@ -36,8 +41,8 @@ const Play = () => {
   return (
     <>
       Music Player
-      <Button style={{'zIndex': 101}} onClick={() => {handleButton()}}>
-        Click Me
+      <Button style={{'zIndex': 101}} onClick={() => {loginButton()}}>
+        Login
       </Button>
     </>
   );
