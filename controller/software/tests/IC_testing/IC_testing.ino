@@ -1,12 +1,12 @@
 #include <Adafruit_NeoPixel.h>
 
 #define AUX_IN A0
-#define STROBE 2
+#define STROBE 4
 #define RESET 3
 #define LED_PIN    6
-
+#define GAIN 5
 #define filter 120
-#define LED_COUNT 144
+#define LED_COUNT 300
 
 int firstPixelHue = 0;     // First pixel starts at red (hue 0)
 
@@ -18,11 +18,14 @@ void setup() {
   pinMode(AUX_IN, INPUT);
   pinMode(STROBE, OUTPUT);
   pinMode(RESET, OUTPUT);
-
+  pinMode(GAIN, OUTPUT);
+  
   // Set frequency
   digitalWrite(RESET, HIGH);
   digitalWrite(RESET, LOW);
 
+  // Tie Gain to low 
+  digitalWrite(GAIN, HIGH);
   // NeoPixels
   strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
   strip.show();            // Turn OFF all pixels ASAP
@@ -49,7 +52,6 @@ void loop() {
   }
   strip.show();                // Update strip with new contents
   firstPixelHue += 65536 / 90; // One cycle of color wheel over 90 frames
-
   Serial.println();
   
 }
