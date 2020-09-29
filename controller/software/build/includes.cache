@@ -1,0 +1,92 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/standard"
+  },
+  {
+    "Sourcefile": "/Users/brent/Desktop/coding/auxme/controller/software/build/sketch/test.cpp.cpp",
+    "Include": "Adafruit_NeoPixel.h",
+    "Includepath": "/Users/brent/Documents/Arduino/libraries/Adafruit_NeoPixel"
+  },
+  {
+    "Sourcefile": "/Users/brent/Desktop/coding/auxme/controller/software/build/sketch/test.cpp.cpp",
+    "Include": "FastLED.h",
+    "Includepath": "/Users/brent/Documents/Arduino/libraries/FastLED"
+  },
+  {
+    "Sourcefile": "/Users/brent/Desktop/coding/auxme/controller/software/build/sketch/test.cpp.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/Adafruit_NeoPixel/Adafruit_NeoPixel.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/Adafruit_NeoPixel/esp8266.c",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/Adafruit_NeoPixel/kendyte_k210.c",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/FastLED.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/bitswap.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/colorpalettes.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/colorutils.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/hsv2rgb.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/lib8tion.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/noise.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/platforms.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/power_mgt.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "/Users/brent/Documents/Arduino/libraries/FastLED/wiring.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]

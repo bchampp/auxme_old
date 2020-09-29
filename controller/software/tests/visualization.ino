@@ -6,7 +6,7 @@
 #define LED_PIN    6
 #define GAIN 5
 #define filter 120
-#define LED_COUNT 300
+#define LED_COUNT 144
 
 int firstPixelHue = 0;     // First pixel starts at red (hue 0)
 
@@ -31,6 +31,11 @@ void setup() {
   strip.show();            // Turn OFF all pixels ASAP
 }
 
+int lastCount = 0;
+int diff = 0;
+int curTimes = 0;
+int times = 150;
+
 void loop() {
   digitalWrite(STROBE, HIGH);
   digitalWrite(STROBE, LOW);
@@ -42,7 +47,21 @@ void loop() {
   strip.clear();         //   Set all pixels in RAM to 0 (off)
   // 'c' counts up from 'b' to end of strip in increments of 3...
   int count = map(x, filter, 800, 0, LED_COUNT);
-  for (int c = 0; c < count; c += 1) {
+  int diff = count - lastCount;
+  int numLeds = count;
+  if(diff < 90){
+    if(curTimes > times){
+      curTimes++;
+    } else {
+      numLeds = lastCount; 
+      curTimes = 0;
+    }
+  }
+  if(curTimes > times){
+
+  } else {
+    strip.clear();
+  for (int c = 0; c < numLeds; c += 1) {
     // hue of pixel 'c' is offset by an amount to make one full
     // revolution of the color wheel (range 65536) along the length
     // of the strip (strip.numPixels() steps):
@@ -50,8 +69,9 @@ void loop() {
     uint32_t color = strip.gamma32(strip.ColorHSV(hue)); // hue -> RGB
     strip.setPixelColor(c, color); // Set pixel 'c' to value 'color' 
   }
+  }
   strip.show();                // Update strip with new contents
   firstPixelHue += 65536 / 90; // One cycle of color wheel over 90 frames
   Serial.println();
-  
+  lastCount = count;
 }
