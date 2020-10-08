@@ -8,14 +8,20 @@
 #include <FastLED.h>
 
 #define NUM_LEDS 144        // How many leds in your strip?
-#define updateLEDS 8        // How many do you want to update every millisecond?
-#define COLOR_SHIFT 180000  // Time for colours to shift to a new spectrum (in ms)
+#define updateLEDS 1        // How many do you want to update every millisecond?
+#define COLOR_SHIFT 1800000  // Time for colours to shift to a new spectrum (in ms)
 CRGB leds[NUM_LEDS];        // Define the array of leds
 
 // Define the digital I/O PINS..
 #define DATA_PIN 6          // led data transfer
 #define PITCH_PIN 0         // pitch input from frequency to voltage converter
 #define BRIGHT_PIN 0        // brightness input from amplified audio signal
+#define AUX_IN A0
+#define STROBE 4
+#define RESET 3
+#define GAIN 5
+#define filter 120
+#define LED_COUNT 144
 
 // Don't touch these, internal color variation variables
 unsigned long setTime = COLOR_SHIFT;
@@ -32,9 +38,19 @@ typedef struct color Color;
 
 void setup() { 
     Serial.begin(9600);
-  	FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+    FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
     pinMode(A0, INPUT);
     pinMode(A0, INPUT);
+      pinMode(STROBE, OUTPUT);
+  pinMode(RESET, OUTPUT);
+  pinMode(GAIN, OUTPUT);
+  
+  // Set frequency
+  digitalWrite(RESET, HIGH);
+  digitalWrite(RESET, LOW);
+
+  // Tie Gain to low 
+  digitalWrite(GAIN, HIGH);
 
     for(int i = 0; i < NUM_LEDS ; i++) {
       leds[i] = CRGB(0,0,0);
@@ -44,7 +60,9 @@ void setup() {
 
 void loop() { 
   unsigned long time = millis();
-
+  digitalWrite(STROBE, HIGH);
+  digitalWrite(STROBE, LOW);
+  delayMicroseconds(22); // let output settle
   // Shift the color spectrum by 200 on set intervals (setTime)
   if(time / (double)setTime >= 1) {
     setTime = time + COLOR_SHIFT;
@@ -65,8 +83,9 @@ void loop() {
   }
 
   // Get the pitch and brightness to compute the new color
-  int newPitch = (analogRead(PITCH_PIN)*2) + shiftC;
-  Color nc = pitchConv(newPitch, analogRead(BRIGHT_PIN));
+  int x = constrain(analogRead(AUX_IN), filter, 1023);
+  int newPitch = x + shiftC;
+  Color nc = pitchConv(newPitch, newPitch);
 
   // Set the left most updateLEDs with the new color
   for(int i = 0; i < updateLEDS; i++) {

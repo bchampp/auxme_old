@@ -11,16 +11,16 @@ import helmet from "helmet";
 // Routes
 import spotify from './api/routes/spotify';
 import login from './api/routes/login';
+import controller from "./api/routes/controller";
 
 dotenv.config();
 const app = express();
 mongoose.set("useFindAndModify", false);
 
-//Allow cross domains
+// Allow cross domains
 const allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  // res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   res.header("Access-Control-Allow-Headers", 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
   // intercept OPTIONS method
@@ -36,6 +36,7 @@ app.use(allowCrossDomain);
 // Include custom routing
 app.use("/api/spotify", spotify);
 app.use("/api/login", login);
+app.use("/api/controller", controller)
 
 //Connect to MLab database
 const db = process.env.DB_URL;

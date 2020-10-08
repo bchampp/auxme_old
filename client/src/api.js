@@ -43,5 +43,13 @@ export default {
         downVote: (song) => {
             axios.post(`/api/queue/downvote`).then(res => res.data.response)
         },
+    },
+    controller: {
+        getVolume: (volume) => {
+            axios.post(`/api/controller/get-volume`).then(res => res.data.response)
+        },
+        setColor: (color) => {
+            axios.post(`/api/controller/set-color?color=${color}`).then(res => res.data.response) 
+        }
     }
 }

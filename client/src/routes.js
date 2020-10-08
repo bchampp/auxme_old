@@ -11,6 +11,7 @@ import LayoutDefault from './layouts/LayoutDefault';
 import Home from './components/pages/landing/Home';
 import About from './components/pages/about/About';
 import Play from './components/pages/play/Play';
+import Control from './components/pages/control/Control';
 import Party from './components/pages/party/Party';
 import Shop from './components/pages/shop/Shop';
 import NotFound from './components/pages/NotFound';
@@ -25,6 +26,7 @@ const Routes = ({ location }) => {
                 <AppRoute exact path="/play" component={Play} layout={LayoutDefault} />
                 <AppRoute exact path="/shop" component={Shop} layout={LayoutDefault} />
                 <AppRoute exact path="/party" component={Party} layout={LayoutDefault} />
+                <AppRoute exact path="/control" component={Control} layout={LayoutDefault} />
                 {/* Default Page for when nothing hits */}
                 <AppRoute exact path="*" component={NotFound} />
             </Switch>

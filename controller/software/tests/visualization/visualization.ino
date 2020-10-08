@@ -28,6 +28,7 @@ void setup() {
   digitalWrite(GAIN, HIGH);
   // NeoPixels
   strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
+  strip.setBrightness(150);
   strip.show();            // Turn OFF all pixels ASAP
 }
 
@@ -46,7 +47,7 @@ void loop() {
   delayMicroseconds(100); // allow analog reading to settle
   strip.clear();         //   Set all pixels in RAM to 0 (off)
   // 'c' counts up from 'b' to end of strip in increments of 3...
-  int count = map(x, filter, 800, 0, LED_COUNT);
+  int count = map(x, filter, 950, 0, LED_COUNT);
   int diff = count - lastCount;
   int numLeds = count;
   if(diff < 90){
