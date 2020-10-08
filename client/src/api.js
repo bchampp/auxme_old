@@ -48,8 +48,8 @@ export default {
         getVolume: (volume) => {
             axios.post(`/api/controller/get-volume`).then(res => res.data.response)
         },
-        setColor: (color) => {
-            axios.post(`/api/controller/set-color?color=${color}`).then(res => res.data.response) 
+        setColor: (r, g, b) => {
+            axios.post(`/api/controller/set-color?r=${r}&g=${g}&b=${b}}`).then(res => res.data.response) 
         }
     }
 }

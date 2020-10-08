@@ -29,7 +29,13 @@ export default function Control(props) {
 
     const handleColorChange = color => {
         setColor(color);
-        api.controller.setColor(color);
+        console.log(color.rgb);
+        console.log(color.rgb.r);
+        let r = color.rgb.r;
+        let g = color.rgb.g;
+        let b = color.rgb.b;
+
+        api.controller.setColor(r, g, b);
     }
 
     const handleDropdownChange = (event) => {

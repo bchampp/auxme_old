@@ -6,6 +6,7 @@ const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 import dotenv from "dotenv";
+require("regenerator-runtime");
 
 const router = express.Router();
 
@@ -25,7 +26,6 @@ router.post("/get-status", async (req, res) => {
 });
 
 router.post("/get-volume", async (req, res) => {
-    // Request color from virtual pin 0
     request(`http://blynk-cloud.com/${BLYNK_AUTH_TOKEN}/get/D0`, (error, response, body) => {
         console.log('Status:', response.statusCode);
         console.log('Headers:', JSON.stringify(response.headers));
@@ -37,8 +37,14 @@ router.post("/get-volume", async (req, res) => {
 });
 
 router.post("/set-color", (req, res) => {
-    const { color } = req.query;
+    const { r, g, b } = req.query;
+    console.log(r);
+    console.log(g);
+    console.log(b);
 
+
+    request(`http://blynk-cloud.com/${BLYNK_AUTH_TOKEN}/update/V2?value=${r}&value=${g}&value=${b}`, function (error, response, body) {
+});
     // Send color to Arduino
     res.json({ response: { success: true }});
 });
