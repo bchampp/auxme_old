@@ -11,6 +11,7 @@ import helmet from "helmet";
 // Routes
 import spotify from './api/routes/spotify';
 import login from './api/routes/login';
+import queue from './api/routes/queue';
 
 dotenv.config();
 const app = express();
@@ -36,6 +37,7 @@ app.use(allowCrossDomain);
 // Include custom routing
 app.use("/api/spotify", spotify);
 app.use("/api/login", login);
+app.use("/api/queue", queue);
 
 //Connect to MLab database
 const db = process.env.DB_URL;
