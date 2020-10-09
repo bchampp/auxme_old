@@ -9,10 +9,7 @@ import { TextField, Backdrop, CircularProgress, Button } from '@material-ui/core
 import SharingURLWindow from './SharingURL';
 import api from '../../../api';
 
-/* Socket IO Stuff */
-import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://127.0.0.1:8081/api/queue";
-var socket;
+import socket from '../../elements/Socket';
 
 /* Custom Button Styling -- there are better ways to organize styling for material components */
 const useStyles = makeStyles({
@@ -98,6 +95,14 @@ export default function Party(props) {
                     }}
                         onClick={() => { setNameInputOpen(true) }}>
                         New Party Room
+                    </Button>
+
+                    <Button classes={{
+                        root: classes.root, // class name, e.g. `classes-nesting-root-x`
+                        label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                    }}
+                        onClick={() => { console.log(socket.emit('add', 'a')); }}>
+                        Add
                     </Button>
                 </div>
                 :
