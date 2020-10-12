@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import api from '../../../api';
+// import api from '../../../api';
 
 const Play = () => {
 
@@ -9,35 +9,35 @@ const Play = () => {
     window.location.replace("http://localhost:8080/api/login/login");
   }
 
-  const handleButton = () => {
-    console.log("Button Click");
-    api.spotify.getUser();
-  }
+  // const handleButton = () => {
+  //   console.log("Button Click");
+  //   api.spotify.getUser();
+  // }
 
-  const playButton = () => {
-    console.log("Play button clicked");
-    api.spotify.togglePlay();
-  }
+  // const playButton = () => {
+  //   console.log("Play button clicked");
+  //   api.spotify.togglePlay();
+  // }
 
-  const nextTrack = () => {
-    console.log("Next track");
-    api.spotify.nextTrack();
-  }
+  // const nextTrack = () => {
+  //   console.log("Next track");
+  //   api.spotify.nextTrack();
+  // }
 
-  const previousTrack = () => {
-    console.log("Previous track");
-    api.spotify.previousTrack();
-  }
+  // const previousTrack = () => {
+  //   console.log("Previous track");
+  //   api.spotify.previousTrack();
+  // }
 
-  const addToQueue = () => {
-    console.log("Adding song to queue");
-    api.spotify.addToQueue();
-  }
+  // const addToQueue = () => {
+  //   console.log("Adding song to queue");
+  //   api.spotify.addToQueue();
+  // }
 
-  const search = () => {
-    console.log("Searching for song");
-    api.spotify.search();
-  }
+  // const search = () => {
+  //   console.log("Searching for song");
+  //   api.spotify.search();
+  // }
   return (
     <>
       Music Player

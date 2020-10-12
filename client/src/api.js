@@ -45,11 +45,28 @@ export default {
         },
     },
     controller: {
-        getVolume: (volume) => {
-            axios.post(`/api/controller/get-volume`).then(res => res.data.response)
+        // Setters
+        setON: toggle => {
+            axios.post(`api/controller/set-power?power=${toggle}`).then(res => res.data.response)
+        },
+        setMode: mode => {
+            axios.post(`/api/controller/set-mode?mode=${mode}`).then(res => res.data.response)
+        },
+        setSensitivity: val => {
+            axios.post(`/api/controller/set-sensitivity?value=${val}`).then(res => res.data.response)
+        },
+        setBrightness: val => {
+            axios.post(`/api/controller/set-brightness?value=${val}`).then(res => res.data.response)
         },
         setColor: (r, g, b) => {
             axios.post(`/api/controller/set-color?r=${r}&g=${g}&b=${b}}`).then(res => res.data.response) 
-        }
+        },
+        // Getters
+        getConnected: token => {
+            axios.post(`/api/controller/get-connected`).then(res => res.data.response)
+        },
+        getVolume: (volume) => {
+            axios.post(`/api/controller/get-volume`).then(res => res.data.response)
+        },
     }
 }

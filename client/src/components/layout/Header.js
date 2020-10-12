@@ -121,24 +121,6 @@ const Header = ({
                       navPosition && `header-nav-${navPosition}`
                     )}>
                     <li>
-                      <Link to="/shop" onClick={closeMenu}>Shop</Link>
-                    </li>
-                  </ul>
-                  <ul className={
-                    classNames(
-                      'list-reset text-xs',
-                      navPosition && `header-nav-${navPosition}`
-                    )}>
-                    <li>
-                      <Link to="/play" onClick={closeMenu}>Play</Link>
-                    </li>
-                  </ul>
-                  <ul className={
-                    classNames(
-                      'list-reset text-xs',
-                      navPosition && `header-nav-${navPosition}`
-                    )}>
-                    <li>
                       <Link to="/control" onClick={closeMenu}>Control</Link>
                     </li>
                   </ul>
