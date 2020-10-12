@@ -12,6 +12,7 @@ import helmet from "helmet";
 import spotify from './api/routes/spotify';
 import login from './api/routes/login';
 import controller from "./api/routes/controller";
+import queue from './api/routes/queue';
 
 dotenv.config();
 const app = express();
@@ -37,6 +38,7 @@ app.use(allowCrossDomain);
 app.use("/api/spotify", spotify);
 app.use("/api/login", login);
 app.use("/api/controller", controller)
+app.use("/api/queue", queue);
 
 //Connect to MLab database
 const db = process.env.DB_URL;
