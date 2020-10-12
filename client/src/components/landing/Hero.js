@@ -5,6 +5,7 @@ import ButtonGroup from '../elements/ButtonGroup';
 import Button from '../elements/Button';
 import Image from '../elements/Image';
 import Modal from '../elements/Modal';
+import Countdown from 'react-countdown';
 
 const propTypes = {
   ...SectionProps.types
@@ -63,11 +64,17 @@ const Hero = ({
             <h1 className="mt-0 mb-16 reveal-from-bottom" data-reveal-delay="200">
               Aux<span className="text-color-primary">Me</span>
             </h1>
+            {/* <h4>
+              Days until Launch
+              </h4>
+            <h3>
+              <Countdown date={(-Date.parse('24 Nov 2020 00:12:00 GMT') + Date.now())} />
+            </h3> */}
             <div className="container-xs">
               <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
-                Our product lets users join a music room, share a queue and upvote/downvote songs.
+                AuxMe lets users join a music room, share a queue and upvote/downvote songs.
                 </p>
-                <p>This lets everyone have input on what music is being played!</p>
+              <p>This lets everyone have input on what music is being played!</p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
                 <ButtonGroup>
                   <Button tag="a" color="primary" wideMobile href="https://auxme.ca">
