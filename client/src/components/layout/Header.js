@@ -133,6 +133,15 @@ const Header = ({
                       <Link to="/play" onClick={closeMenu}>Play</Link>
                     </li>
                   </ul>
+                  <ul className={
+                    classNames(
+                      'list-reset text-xs',
+                      navPosition && `header-nav-${navPosition}`
+                    )}>
+                    <li>
+                      <Link to="/control" onClick={closeMenu}>Control</Link>
+                    </li>
+                  </ul>
                   {!hideSignin &&
                     <ul
                       className="list-reset header-nav-right"

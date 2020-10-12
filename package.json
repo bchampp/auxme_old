@@ -34,6 +34,7 @@
     "prerender-node": "^3.2.5",
     "react-compound-slider": "^2.5.0",
     "react-datepicker": "^3.0.0",
+    "regenerator-runtime": "^0.13.7",
     "socket.io": "^2.3.0",
     "underscore": "^1.10.2",
     "validator": "^12.1.0"

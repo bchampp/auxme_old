@@ -1,5 +1,8 @@
 {
+    "sketch": "controller/software/tests/visualization2/visualization2.ino",
+    "port": "/dev/cu.usbmodem145401",
     "programmer": "AVR ISP",
     "board": "arduino:avr:uno",
-    "sketch": "controller/main.ino"
+    "output": "controller/software/build",
+    "prebuild": "bash controller/software/prebuild.sh"
 }
